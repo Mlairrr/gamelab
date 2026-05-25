@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>GameLab.ru - Обзоры игр</title>
+    <style>
+        /* Используем те же стили, что и на главной странице */
+        body { background-color: #1a2b36; font-family: Arial, sans-serif; color: #333; margin: 0; padding: 0; }
+        .container { width: 960px; margin: 0 auto; }
+        .header { background: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop') no-repeat center top; background-size: cover; height: 250px; position: relative; border-bottom: 5px solid #555; }
+        .logo { position: absolute; bottom: 20px; left: 30px; color: #fff; text-shadow: 2px 2px 4px #000; }
+        .logo h1 { font-size: 36px; margin: 0; }
+        .logo p { font-size: 18px; margin: 5px 0 0 0; }
+        .search-box { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 5px; }
+        
+        .main-wrapper { display: flex; margin-top: 10px; }
+        .content { width: 65%; padding-right: 15px; }
+        .sidebar { width: 35%; }
+        
+        .block { background: linear-gradient(to bottom, #eef2f5, #dce6ed); border: 1px solid #aab; margin-bottom: 15px; border-radius: 3px; }
+        .block-header { background: linear-gradient(to bottom, #eef2f5, #cdd8e3); padding: 5px 10px; border-bottom: 1px solid #ccc; font-weight: bold; color: #2c3e50; }
+        .block-content { padding: 10px; font-size: 13px; }
+        
+        .post-title { font-size: 18px; color: #8b1a1a; text-decoration: none; font-weight: bold; display: block; margin-bottom: 5px; }
+        .post-title:hover { text-decoration: underline; }
+        
+        .review-item { border-bottom: 1px dashed #999; margin-bottom: 15px; padding-bottom: 10px; }
+        .review-item:last-child { border-bottom: none; }
+        .review-meta { font-size: 11px; color: #666; margin-bottom: 5px; }
+        .review-score { font-weight: bold; color: #27ae60; }
+        
+        .sidebar a { display: block; padding: 3px 0; color: #2c3e50; text-decoration: none; }
+        .sidebar a:hover { text-decoration: underline; color: #8b1a1a; }
+        .footer { text-align: center; padding: 10px; color: #ccc; font-size: 12px; border-top: 1px solid #333; margin-top: 10px; }
+@media (max-width: 920px) {
+  .container {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .header {
+    height: auto;
+    min-height: 150px;
+  }
+  .logo {
+    position: static;
+    padding: 10px 0 0 20px;
+  }
+  .search-box {
+    position: static;
+    margin: 10px 20px;
+    background: rgba(255,255,255,0.9);
+  }
+  .main-wrapper {
+    flex-direction: column;
+  }
+  .content {
+    width: 100%;
+    padding-right: 0;
+  }
+  .sidebar {
+    width: 100%;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <h1>GameLab.ru</h1>
+                <p>Обзоры компьютерных игр</p>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Найти игру?">
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <!-- Main Content -->
+            <div class="content">
+                <div class="block">
+                    <div class="block-header">Свежие обзоры</div>
+                    <div class="block-content">
+                        
+                        <div class="review-item">
+                            <a href="#" class="post-title">Обзор Cyberpunk 2077: Phantom Liberty</a>
+                            <div class="review-meta">Автор: admin | Дата: 12.05.2026</div>
+                            <p>Дополнение добавляет новый район, шпионский сюжет и значительно улучшает игровой процесс. Особенно порадовала работа Киану Ривза.</p>
+                            <div class="review-score">Оценка: 9.5 / 10</div>
+                        </div>
+
+                        <div class="review-item">
+                            <a href="#" class="post-title">Обзор Baldur's Gate 3</a>
+                            <div class="review-meta">Автор: admin | Дата: 10.05.2026</div>
+                            <p>Настоящий шедевр от Larian Studios. Огромный мир, глубокая механика и невероятная свобода действий. Обязательна к прохождению!</p>
+                            <div class="review-score">Оценка: 10 / 10</div>
+                        </div>
+
+                        <div class="review-item">
+                            <a href="#" class="post-title">Обзор Starfield</a>
+                            <div class="review-meta">Автор: admin | Дата: 05.05.2026</div>
+                            <p>Космическая эпопея от Bethesda. Игра затягивает на сотни часов, хотя некоторые планеты кажутся пустыми.</p>
+                            <div class="review-score">Оценка: 8.0 / 10</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar (такая же, как на главной) -->
+            <div class="sidebar">
+                <div class="block">
+                    <div class="block-header">Страницы</div>
+                    <div class="block-content">
+                        <a href="index.html">Главная</a>
+                        <a href="reviews.html">Обзоры игр</a>
+                        <a href="about.html">О проекте</a>
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="block-header">Архивы</div>
+                    <div class="block-content"><a href="#">Май 2026</a></div>
+                </div>
+                <div class="block">
+                    <div class="block-header">Категории</div>
+                    <div class="block-content"><a href="#">Игровые новости</a></div>
+                </div>
+                <div class="block">
+                    <div class="block-header">Поиск</div>
+                    <div class="block-content" style="text-align:center;">
+                        <input type="text" style="width:90%; margin-bottom:5px;"><br>
+                        <button>Поиск</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 GameLab.ru Курсовая работа
+        </div>
+    </div>
+</body>
+</html>

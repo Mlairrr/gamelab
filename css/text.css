@@ -1,0 +1,86 @@
+body {
+  color: #111;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.site-title {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: normal;
+  letter-spacing: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65);
+}
+
+.site-description {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.search-top input {
+  color: #111;
+  font-size: 11px;
+}
+
+.search-top input::placeholder {
+  color: #111;
+  opacity: 1;
+}
+
+.post-title {
+  margin: 0;
+  color: #924c5f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: normal;
+  line-height: 1.1;
+}
+
+.post-meta,
+.post-footer {
+  color: #70445c;
+  font-size: 10px;
+}
+
+.post-body {
+  color: #111;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.post-date {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1;
+  text-shadow: 0 1px 2px #000;
+}
+
+.post-date .day {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.post-date .month {
+  font-size: 8px;
+}
+
+.sidebox-title {
+  color: #000;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.sidebox-content {
+  font-size: 11px;
+}
+
+.search-form button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}

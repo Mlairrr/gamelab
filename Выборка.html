@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Добавление компьютерной игры</title>
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --surface: #111827;
+      --surface-light: #1a2332;
+      --primary: #6c5ce7;
+      --primary-glow: #8b7cf0;
+      --accent: #00cec9;
+      --accent-glow: #00e5e0;
+      --text: #e2e8f0;
+      --text-secondary: #a0b4c8;
+      --text-muted: #6b7d95;
+      --border: #263040;
+      --border-focus: #6c5ce7;
+      --danger: #e74c3c;
+      --radius-sm: 8px;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(108, 92, 231, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 60%, rgba(0, 206, 201, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 90%, rgba(108, 92, 231, 0.05) 0%, transparent 50%);
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(1px 1px at 15% 25%, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1px 1px at 25% 45%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 35% 15%, rgba(255, 255, 255, 0.35), transparent),
+        radial-gradient(1px 1px at 55% 65%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 65% 35%, rgba(255, 255, 255, 0.35), transparent),
+        radial-gradient(1px 1px at 75% 55%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 85% 75%, rgba(255, 255, 255, 0.25), transparent),
+        radial-gradient(1.5px 1.5px at 10% 80%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 45% 85%, rgba(255, 255, 255, 0.25), transparent),
+        radial-gradient(1px 1px at 90% 20%, rgba(255, 255, 255, 0.35), transparent);
+    }
+
+    .form-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 800px;
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg), 0 0 30px rgba(108, 92, 231, 0.25);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .form-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-glow), var(--accent-glow));
+      background-size: 200% 100%;
+      animation: shimmer 4s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .form-header {
+      padding: 35px 40px 25px;
+      text-align: center;
+    }
+
+    .form-header .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #5a4bd1);
+      margin-bottom: 18px;
+      font-size: 28px;
+      box-shadow: 0 8px 25px rgba(108, 92, 231, 0.35);
+      position: relative;
+    }
+
+    .form-header .icon::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 2px solid rgba(108, 92, 231, 0.3);
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    .form-header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #fff;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, #fff 0%, #c8d6e5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .form-header .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .form-body {
+      padding: 10px 40px 40px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 24px;
+    }
+
+    .form-grid .full-width {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-body {
+        padding: 10px 20px 30px;
+      }
+      .form-header {
+        padding: 25px 20px 15px;
+      }
+      .form-header h1 {
+        font-size: 1.4rem;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-group label .label-icon {
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    .form-group label .required {
+      color: var(--danger);
+      font-weight: 700;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="tel"],
+    input[type="search"],
+    input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    input[type="datetime-local"],
+    input[type="month"],
+    input[type="color"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--surface-light);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      outline: none;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.12), 0 0 20px rgba(108, 92, 231, 0.08);
+      background: #1c2838;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    input[type="color"] {
+      padding: 6px 10px;
+      height: 48px;
+      cursor: pointer;
+      min-width: 80px;
+    }
+
+    input[type="color"]::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+    input[type="color"]::-webkit-color-swatch {
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      background: var(--surface-light);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      outline: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid #fff;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(108, 92, 231, 0.5);
+      transition: var(--transition);
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 18px rgba(108, 92, 231, 0.6);
+    }
+
+    .range-output {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .range-output span {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1rem;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a0b4c8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    select[size][multiple] {
+      background-image: none;
+      padding-right: 16px;
+      min-height: 100px;
+    }
+
+    input[list] {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b7d95' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+    }
+
+    .file-upload-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .file-upload-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      background: var(--surface-light);
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .file-upload-label:hover {
+      border-color: var(--primary);
+      color: var(--primary-glow);
+      background: rgba(108, 92, 231, 0.06);
+    }
+
+    .file-upload-label .upload-icon {
+      font-size: 1.2rem;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .file-name {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 250px;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--surface-light);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text);
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: var(--transition);
+    }
+
+    .radio-option:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .radio-option input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: var(--transition);
+      background: transparent;
+    }
+
+    .radio-option input[type="radio"]:checked {
+      border-color: var(--primary);
+      background: var(--primary);
+      box-shadow: inset 0 0 0 4px var(--surface-light);
+    }
+
+    .radio-option input[type="radio"]:focus-visible {
+      outline: 2px solid var(--primary-glow);
+      outline-offset: 2px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    button,
+    .btn {
+      padding: 13px 28px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: inherit;
+      letter-spacing: 0.3px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--primary), #5a4bd1);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(108, 92, 231, 0.4);
+    }
+    .btn-submit:hover {
+      box-shadow: 0 6px 28px rgba(108, 92, 231, 0.55);
+      transform: translateY(-2px);
+    }
+    .btn-submit:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(108, 92, 231, 0.3);
+    }
+
+    .btn-reset {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1.5px solid var(--border);
+    }
+    .btn-reset:hover {
+      border-color: #e74c3c;
+      color: #e74c3c;
+      background: rgba(231, 76, 60, 0.06);
+    }
+
+    hr.section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 8px 0 16px;
+      grid-column: 1 / -1;
+      position: relative;
+    }
+    hr.section-divider::after {
+      content: attr(data-label);
+      position: absolute;
+      top: -10px;
+      left: 0;
+      background: var(--surface);
+      padding: 0 14px 0 0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .button-group {
+        flex-direction: column;
+      }
+      .btn-submit,
+      .btn-reset {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-wrapper">
+    <!-- Заголовок формы -->
+    <div class="form-header">
+      <div class="icon">🎮</div>
+      <h1>Добавление компьютерной игры</h1>
+      <p class="subtitle">Заполните все поля, чтобы добавить игру в каталог</p>
+    </div>
+
+    <!-- Тело формы -->
+    <div class="form-body">
+      <!-- ИЗМЕНЕНИЕ: onsubmit вместо action и method -->
+      <form name="gameForm" onsubmit="return showAlert(event)" enctype="multipart/form-data">
+
+        <div class="form-grid">
+
+          <!-- Название игры -->
+          <div class="form-group">
+            <label for="game_name">
+              <span class="label-icon">📛</span> Название игры <span class="required">*</span>
+            </label>
+            <input type="text" id="game_name" name="game_name" placeholder="Например: Cyberpunk 2077" required autocomplete="off">
+          </div>
+
+          <!-- Версия (с datalist) -->
+          <div class="form-group">
+            <label for="game_version">
+              <span class="label-icon">🔢</span> Версия <span class="required">*</span>
+            </label>
+            <input type="text" id="game_version" name="game_version" list="version_suggestions" placeholder="Например: 2.1.0" required>
+            <datalist id="version_suggestions">
+              <option value="1.0">
+              <option value="1.0.1">
+              <option value="1.5">
+              <option value="2.0">
+              <option value="2.1.0">
+              <option value="3.0">
+              <option value="Gold Edition">
+              <option value="Definitive Edition">
+              <option value="Game of the Year Edition">
+              <option value="Remastered">
+            </datalist>
+          </div>
+
+          <!-- Жанр (выпадающий список) -->
+          <div class="form-group">
+            <label for="game_genre">
+              <span class="label-icon">🎭</span> Жанр <span class="required">*</span>
+            </label>
+            <select id="game_genre" name="game_genre" size="1" required>
+              <option value="" disabled selected>— Выберите жанр —</option>
+              <option value="action">Экшен (Action)</option>
+              <option value="rpg">RPG (Ролевая игра)</option>
+              <option value="strategy">Стратегия</option>
+              <option value="shooter">Шутер</option>
+              <option value="simulation">Симулятор</option>
+              <option value="adventure">Приключение (Adventure)</option>
+              <option value="horror">Хоррор / Survival Horror</option>
+              <option value="racing">Гонки</option>
+              <option value="sports">Спорт</option>
+              <option value="puzzle">Головоломка</option>
+              <option value="mmorpg">MMORPG</option>
+              <option value="moba">MOBA</option>
+              <option value="visual_novel">Визуальная новелла</option>
+              <option value="indie">Инди</option>
+              <option value="sandbox">Песочница (Sandbox)</option>
+            </select>
+          </div>
+
+          <!-- Фирма-производитель (поиск + datalist) -->
+          <div class="form-group">
+            <label for="game_manufacturer">
+              <span class="label-icon">🏢</span> Фирма-производитель <span class="required">*</span>
+            </label>
+            <input type="search" id="game_manufacturer" name="game_manufacturer" list="manufacturer_list" placeholder="Начните вводить название..." required autocomplete="off">
+            <datalist id="manufacturer_list">
+              <option value="CD Projekt Red">
+              <option value="Rockstar Games">
+              <option value="Ubisoft">
+              <option value="Electronic Arts (EA)">
+              <option value="Blizzard Entertainment">
+              <option value="Bethesda Game Studios">
+              <option value="Valve Corporation">
+              <option value="Square Enix">
+              <option value="Capcom">
+              <option value="FromSoftware">
+              <option value="Naughty Dog">
+              <option value="Nintendo">
+              <option value="Microsoft Game Studios">
+              <option value="Sony Interactive Entertainment">
+              <option value="Activision">
+              <option value="Epic Games">
+              <option value="Riot Games">
+              <option value="Larian Studios">
+            </datalist>
+            <small style="color: var(--text-muted); font-size: 0.78rem; margin-top: 2px;">🔍 Используйте поиск или выберите из предложенных вариантов</small>
+          </div>
+
+          <!-- Дата выхода -->
+          <div class="form-group">
+            <label for="release_date">
+              <span class="label-icon">📅</span> Дата выхода
+            </label>
+            <input type="date" id="release_date" name="release_date">
+          </div>
+
+          <!-- Время выхода -->
+          <div class="form-group">
+            <label for="release_time">
+              <span class="label-icon">⏰</span> Время выхода (по UTC)
+            </label>
+            <input type="time" id="release_time" name="release_time" value="12:00">
+          </div>
+
+          <!-- Месяц релиза -->
+          <div class="form-group">
+            <label for="release_month">
+              <span class="label-icon">🗓️</span> Планируемый месяц релиза
+            </label>
+            <input type="month" id="release_month" name="release_month">
+          </div>
+
+          <!-- Дата и время события -->
+          <div class="form-group">
+            <label for="event_datetime">
+              <span class="label-icon">🕹️</span> Дата и время игрового события / стрима
+            </label>
+            <input type="datetime-local" id="event_datetime" name="event_datetime">
+          </div>
+
+          <!-- Постер (файл) -->
+          <div class="form-group full-width">
+            <label>
+              <span class="label-icon">🖼️</span> Постер игры (файл) <span class="required">*</span>
+            </label>
+            <div class="file-upload-wrapper">
+              <label class="file-upload-label" for="game_poster">
+                <span class="upload-icon">📁</span> Выбрать файл
+              </label>
+              <input type="file" id="game_poster" name="game_poster" accept="image/png, image/jpeg, image/webp, image/gif" required>
+              <span class="file-name" id="file_name_display">Файл не выбран</span>
+            </div>
+            <small style="color: var(--text-muted); font-size: 0.78rem;">Поддерживаются: PNG, JPEG, WebP, GIF. Макс. размер: 10 МБ</small>
+          </div>
+
+          <!-- Описание игры -->
+          <div class="form-group full-width">
+            <label for="game_description">
+              <span class="label-icon">📝</span> Описание игры <span class="required">*</span>
+            </label>
+            <textarea id="game_description" name="game_description" cols="45" rows="5" placeholder="Опишите сюжет, особенности геймплея, ключевые механики..." required style="min-height: 120px;"></textarea>
+          </div>
+
+          <!-- Условия распространения (Radio) -->
+          <div class="form-group full-width">
+            <label>
+              <span class="label-icon">📦</span> Условия распространения <span class="required">*</span>
+            </label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="distribution" value="free" checked>
+                <span>🆓 Бесплатная (Free-to-Play)</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="distribution" value="paid">
+                <span>💰 Платная (единоразовая покупка)</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="distribution" value="subscription">
+                <span>🔁 По подписке</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="distribution" value="freemium">
+                <span>🎁 Условно-бесплатная (Freemium / с микротранзакциями)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Разделитель -->
+          <hr class="section-divider" data-label="Дополнительная информация">
+
+          <!-- Цена (Number) -->
+          <div class="form-group">
+            <label for="game_price">
+              <span class="label-icon">💵</span> Цена (в USD)
+            </label>
+            <input type="number" id="game_price" name="game_price" min="0" max="9999" step="0.99" placeholder="59.99" value="0">
+          </div>
+
+          <!-- Рейтинг (Range) -->
+          <div class="form-group">
+            <label for="game_rating">
+              <span class="label-icon">⭐</span> Рейтинг (от 1 до 10)
+            </label>
+            <div class="range-output">
+              <input type="range" id="game_rating" name="game_rating" min="1" max="10" step="0.5" value="7.5" oninput="document.getElementById('rating_value').textContent = this.value">
+              <span id="rating_value">7.5</span>
+            </div>
+          </div>
+
+          <!-- Цветовая тема (Color) -->
+          <div class="form-group">
+            <label for="game_color">
+              <span class="label-icon">🎨</span> Цвет темы игры
+            </label>
+            <input type="color" id="game_color" name="game_color" value="#6c5ce7">
+          </div>
+
+          <!-- Веб-сайт (URL) -->
+          <div class="form-group">
+            <label for="game_website">
+              <span class="label-icon">🌐</span> Официальный сайт
+            </label>
+            <input type="url" id="game_website" name="game_website" placeholder="https://example.com/game" pattern="https?://.+" title="Введите корректный URL, начиная с http:// или https://">
+          </div>
+
+          <!-- Email поддержки -->
+          <div class="form-group">
+            <label for="support_email">
+              <span class="label-icon">📧</span> Email службы поддержки
+            </label>
+            <input type="email" id="support_email" name="support_email" placeholder="support@game.com" autocomplete="email">
+          </div>
+
+          <!-- Телефон (Tel) -->
+          <div class="form-group">
+            <label for="support_phone">
+              <span class="label-icon">📞</span> Телефон поддержки
+            </label>
+            <input type="tel" id="support_phone" name="support_phone" placeholder="+7 (999) 123-45-67" pattern="[\+0-9\s\-\(\)]{5,20}" title="Введите номер телефона в международном формате">
+          </div>
+
+          <!-- Кнопки -->
+          <div class="form-group full-width button-group" style="margin-top: 14px;">
+            <button type="submit" class="btn btn-submit">
+              ✅ Добавить игру в каталог
+            </button>
+            <button type="reset" class="btn btn-reset" onclick="document.getElementById('file_name_display').textContent='Файл не выбран'; document.getElementById('rating_value').textContent='7.5';">
+              🔄 Сбросить форму
+            </button>
+          </div>
+
+        </div><!-- /form-grid -->
+      </form>
+    </div><!-- /form-body -->
+  </div><!-- /form-wrapper -->
+
+  <!-- Скрипт для отображения имени файла -->
+  <script>
+    const fileInput = document.getElementById('game_poster');
+    const fileNameDisplay = document.getElementById('file_name_display');
+
+    fileInput.addEventListener('change', function() {
+      if (this.files && this.files.length > 0) {
+        const name = this.files[0].name;
+        fileNameDisplay.textContent = name;
+        fileNameDisplay.style.color = '#2ecc71';
+        fileNameDisplay.style.fontStyle = 'normal';
+      } else {
+        fileNameDisplay.textContent = 'Файл не выбран';
+        fileNameDisplay.style.color = '#6b7d95';
+        fileNameDisplay.style.fontStyle = 'italic';
+      }
+    });
+
+    document.querySelector('.btn-reset').addEventListener('click', function() {
+      setTimeout(() => {
+        fileNameDisplay.textContent = 'Файл не выбран';
+        fileNameDisplay.style.color = '#6b7d95';
+        fileNameDisplay.style.fontStyle = 'italic';
+      }, 10);
+    });
+  </script>
+
+  <!-- ДОБАВЛЕНО: Скрипт имитации работы формы -->
+  <script>
+    function showAlert(e) {
+      e.preventDefault(); // Отменяем отправку формы
+      alert('✅ Игра успешно добавлена в каталог! ');
+      return false;
+    }
+  </script>
+
+</body>
+</html>

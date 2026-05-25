@@ -1,0 +1,35 @@
+.page {
+  background: url("../img/images/page.jpg") no-repeat top center;
+  background-size: 900px 405px;
+}
+
+.post {
+  background:
+    url("../img/images/post_top.png") no-repeat top left,
+    url("../img/images/post_bottom.png") no-repeat bottom left,
+    url("../img/images/posts_bg.png") repeat-y left 20px;
+  background-size: 518px 20px, 518px 20px, 518px 2px;
+}
+
+.post-date {
+  background: url("../img/images/post_date.gif") no-repeat center center;
+  background-size: 65px 61px;
+}
+
+.sidebox {
+  background:
+    url("../img/images/sidebar_box_top.png") no-repeat top left,
+    url("../img/images/sidebar_box_bottom.png") no-repeat bottom left,
+    url("../img/images/sidebar_bg.gif") repeat-y left 17px;
+  background-size: 176px 17px, 176px 17px, 176px 2px;
+}
+
+.sidebox-title {
+  background: url("../img/images/sidebar_title.png") no-repeat top left;
+  background-size: 176px 35px;
+}
+
+.sidebox-title::before {
+  background: url("../img/images/sidebar_box_top.png") no-repeat top left;
+  background-size: 176px 17px;
+}
