@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameLab.ru - Обзоры игр</title>
     <style>
-        /* Основные стили */
         body { 
             background-color: #1a2b36; 
             font-family: Arial, sans-serif; 
@@ -127,7 +126,6 @@
             margin-top: 10px; 
         }
 
-        /* АДАПТИВНОСТЬ: Планшеты и телефоны */
         @media (max-width: 920px) {
             .container {
                 width: 100%;
@@ -167,7 +165,6 @@
             }
         }
 
-        /* АДАПТИВНОСТЬ: Маленькие телефоны (до 600px) */
         @media (max-width: 600px) {
             .logo h1 {
                 font-size: 22px;
@@ -187,9 +184,17 @@
             }
             .search-box {
                 margin: 10px 10px;
+                padding: 3px 8px;
+            }
+            .search-box input {
+                font-size: 14px;
+                height: 28px;
             }
             .block-content {
                 padding: 8px;
+            }
+            .block {
+                margin-bottom: 10px;
             }
         }
     </style>
@@ -207,7 +212,6 @@
         </div>
 
         <div class="main-wrapper">
-            <!-- Main Content -->
             <div class="content">
                 <div class="block">
                     <div class="block-header">Свежие обзоры</div>
@@ -238,7 +242,6 @@
                 </div>
             </div>
 
-            <!-- Sidebar (такая же, как на главной) -->
             <div class="sidebar">
                 <div class="block">
                     <div class="block-header">Страницы</div>
