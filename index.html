@@ -23,8 +23,8 @@
       <article class="post">
         <div class="post-inner">
           <div class="post-date">
-            <span class="day">13</span>
-            <span class="month">МАЙ</span>
+            <span class="day" id="currentDay">13</span>
+            <span class="month" id="currentMonth">МАЙ</span>
           </div>
           <h1 class="post-title">Главные релизы недели!</h1>
           <div class="post-meta">Категория: <a href="#">Игры</a>&nbsp;&nbsp;&nbsp; Автор: <a href="#">admin</a></div>
@@ -99,5 +99,15 @@
       </aside>
     </main>
   </div>
+
+  <script>
+    const date = new Date();
+    const day = date.getDate();
+    const months = ['ЯНВ', 'ФЕВ', 'МАР', 'АПР', 'МАЙ', 'ИЮН', 'ИЮЛ', 'АВГ', 'СЕН', 'ОКТ', 'НОЯ', 'ДЕК'];
+    const month = months[date.getMonth()];
+    
+    document.getElementById('currentDay').textContent = day;
+    document.getElementById('currentMonth').textContent = month;
+  </script>
 </body>
 </html>
