@@ -164,6 +164,8 @@ body {
   padding: 2px 10px 3px;
 }
 
+/* ===== АДАПТИВНОСТЬ ===== */
+
 @media (max-width: 920px) {
   .page {
     width: 100%;
