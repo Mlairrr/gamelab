@@ -1,6 +1,3 @@
-:root {
-  color-scheme: only light;
-}
 * {
   box-sizing: border-box;
 }
@@ -67,6 +64,9 @@ body {
 
 .post {
   width: 518px;
+  border: 1px solid #aab;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .post-inner {
@@ -116,6 +116,9 @@ body {
 .sidebox {
   width: 176px;
   margin-bottom: 15px;
+  border: 1px solid #aab;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .sidebox-title {
@@ -208,10 +211,9 @@ body {
   }
 
   .search-top input {
-  width: 100%;
-  height: 28px;
-  font-size: 14px;
-}
+    width: 100%;
+    margin: 0;
+  }
 
   .post-inner {
     padding: 15px;
@@ -260,12 +262,16 @@ body {
   }
 
   .search-top {
-    padding: 8px;
+    padding: 8px 15px;
   }
 
   .search-top input {
+    width: 100%;
+    margin: 0;
+    padding: 5px 10px;
+    text-align: center;
     font-size: 14px;
-    height: 28px;
+    height: 30px;
   }
 
   .post-title {
@@ -306,9 +312,10 @@ body {
   }
 
   .search-form button {
-    padding: 3px 0;
+    padding: 4px 0;
     font-size: 12px;
-    width: 90%;
-    margin: 3px auto 0;
+    width: 80%;
+    max-width: 200px;
+    margin: 5px auto 0;
   }
 }
