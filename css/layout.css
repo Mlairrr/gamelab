@@ -12,6 +12,7 @@ body {
   background: #1d3544;
 }
 
+/* ===== ДЕСКТОП ===== */
 .page {
   width: 900px;
   min-height: 815px;
@@ -166,6 +167,7 @@ body {
 
 /* ===== АДАПТИВНОСТЬ ===== */
 
+/* Планшеты и телефоны */
 @media (max-width: 920px) {
   .page {
     width: 100%;
@@ -178,11 +180,21 @@ body {
   }
 
   .post {
-    width: 100%;
+    width: 100% !important;
+    border: 1px solid #aab;
+    border-radius: 3px;
+    overflow: hidden;
   }
 
   .sidebar-column {
-    width: 100%;
+    width: 100% !important;
+  }
+
+  .sidebox {
+    width: 100% !important;
+    border: 1px solid #aab;
+    border-radius: 3px;
+    overflow: hidden;
   }
 
   .header {
@@ -228,10 +240,6 @@ body {
 
   .post-body {
     margin-left: 0;
-  }
-
-  .sidebox {
-    width: 100%;
   }
 
   .search-form input {
