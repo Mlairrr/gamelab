@@ -163,7 +163,6 @@ body {
   margin: 3px auto 0;
   padding: 2px 10px 3px;
 }
-
 @media (max-width: 920px) {
   .page {
     width: 100%;
@@ -171,55 +170,34 @@ body {
   }
 
   .content {
+    display: grid;
     grid-template-columns: 1fr;
+    gap: 8px;
     padding: 0 10px;
     min-width: 0;
   }
 
-  .post {
-    width: 100%;
-    border: 1px solid #aab;
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .sidebar-column {
-    width: 100%;
-  }
-
-  .sidebox {
-    width: 100%;
-    border: 1px solid #aab;
-    border-radius: 3px;
-    overflow: hidden;
+  .post, .sidebar-column, .sidebox {
+    width: 100% !important;
   }
 
   .header {
     height: auto;
-    min-height: 200px;
-    background-size: cover;
+    min-height: 100px;
   }
 
-  .site-title {
-    position: static;
-    padding: 10px 0 0 20px;
-    font-size: 28px;
-  }
-
+  .site-title, 
   .site-description {
     position: static;
-    padding: 0 0 10px 20px;
-    font-size: 16px;
+    padding: 10px 20px;
   }
 
   .search-top {
     position: static;
     width: 100%;
-    padding: 10px 20px;
-    background: rgba(255,255,255,0.8);
-    border-radius: 5px;
-    margin-top: 10px;
+    margin: 10px 0;
     height: auto;
+    padding: 10px;
   }
 
   .search-top input {
@@ -228,16 +206,22 @@ body {
   }
 
   .post-inner {
-    padding: 15px;
+    padding: 10px;
   }
 
   .post-date {
     position: static;
+    width: 100%;
     margin-bottom: 10px;
+    text-align: left;
   }
 
   .post-body {
-    margin-left: 0;
+    margin-top: 10px;
+    margin-left: 0 !important;
+    padding-right: 0;
+    word-wrap: break-word;
+    overflow: hidden;
   }
 
   .search-form input {
@@ -248,6 +232,8 @@ body {
     width: 100%;
     margin: 5px 0 0;
   }
+}
+
 
   .sidebox-content {
     padding: 10px;

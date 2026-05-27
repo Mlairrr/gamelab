@@ -1,6 +1,4 @@
-* {
-  max-width: 100%;
-  word-wrap: break-word;
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -12,12 +10,10 @@ body {
 
 body {
   background: #1d3544;
-  overflow-x: hidden;
 }
 
 .page {
-  width: 100%;
-  max-width: 900px;
+  width: 900px;
   min-height: 815px;
   margin: 0 auto;
   position: relative;
@@ -26,8 +22,6 @@ body {
 .header {
   height: 386px;
   position: relative;
-  background-size: cover;
-  background-position: center;
 }
 
 .site-title {
@@ -62,16 +56,17 @@ body {
 
 .content {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 176px 176px;
+  grid-template-columns: 518px 176px 176px;
   gap: 8px;
   align-items: start;
   padding-left: 12px;
-  padding-right: 12px;
 }
 
 .post {
-  width: 100%;
-  min-width: 0;
+  width: 518px;
+  border: 1px solid #aab;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .post-inner {
@@ -121,6 +116,9 @@ body {
 .sidebox {
   width: 176px;
   margin-bottom: 15px;
+  border: 1px solid #aab;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .sidebox-title {
@@ -165,83 +163,65 @@ body {
   margin: 3px auto 0;
   padding: 2px 10px 3px;
 }
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ========================= */
-/* АДАПТИВ ПОД ПЛАНШЕТЫ */
-/* ========================= */
-
 @media (max-width: 920px) {
-
   .page {
     width: 100%;
     min-height: auto;
   }
 
   .content {
+    display: grid;
     grid-template-columns: 1fr;
+    gap: 8px;
     padding: 0 10px;
+    min-width: 0;
   }
 
-  .sidebar-column {
-    width: 100%;
-  }
-
-  .sidebox {
-    width: 100%;
+  .post, .sidebar-column, .sidebox {
+    width: 100% !important;
   }
 
   .header {
     height: auto;
-    min-height: 220px;
-    padding-bottom: 15px;
+    min-height: 100px;
   }
 
-  .site-title {
-    position: static;
-    padding: 15px 20px 0;
-    font-size: 28px;
-  }
-
+  .site-title, 
   .site-description {
     position: static;
-    padding: 5px 20px 10px;
-    font-size: 16px;
+    padding: 10px 20px;
   }
 
   .search-top {
     position: static;
-    width: calc(100% - 40px);
-    margin: 10px 20px;
-    padding: 8px 12px;
-    background: rgba(255,255,255,0.8);
-    border-radius: 5px;
+    width: 100%;
+    margin: 10px 0;
     height: auto;
+    padding: 10px;
   }
 
   .search-top input {
     width: 100%;
-    height: 30px;
     margin: 0;
-    padding: 5px 10px;
-    background: transparent;
   }
 
   .post-inner {
-    padding: 15px;
+    padding: 10px;
   }
 
   .post-date {
     position: static;
+    width: 100%;
     margin-bottom: 10px;
+    text-align: left;
   }
 
   .post-body {
-    margin-left: 0;
+    margin-top: 10px;
+    margin-left: 0 !important;
+    padding-right: 0;
+    word-wrap: break-word;
+    overflow: hidden;
   }
 
   .search-form input {
@@ -250,23 +230,24 @@ img {
 
   .search-form button {
     width: 100%;
-    margin-top: 5px;
+    margin: 5px 0 0;
   }
+}
+
 
   .sidebox-content {
     padding: 10px;
   }
+
+  .sidebox-title {
+    padding: 18px 10px 0;
+  }
 }
 
-/* ========================= */
-/* АДАПТИВ ПОД ТЕЛЕФОНЫ */
-/* ========================= */
-
 @media (max-width: 600px) {
-
   .site-title {
     font-size: 24px;
-    padding: 10px;
+    padding: 10px 10px 0;
   }
 
   .site-description {
@@ -275,14 +256,16 @@ img {
   }
 
   .search-top {
-    margin: 10px;
-    width: calc(100% - 20px);
-    padding: 8px;
+    padding: 8px 15px;
   }
 
   .search-top input {
+    width: 100%;
+    margin: 0;
+    padding: 5px 10px;
     text-align: center;
     font-size: 14px;
+    height: 30px;
   }
 
   .post-title {
@@ -317,17 +300,16 @@ img {
   }
 
   .search-form input {
+    height: 28px;
     width: 100%;
-    height: 30px;
+    margin: 0 auto;
   }
 
   .search-form button {
-    width: 100%;
-    padding: 6px 0;
+    padding: 4px 0;
     font-size: 12px;
-  }
-
-  .post-footer {
-    text-align: center;
+    width: 100%;
+    max-width: 200px;
+    margin: 5px auto 0;
   }
 }
