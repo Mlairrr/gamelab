@@ -33,3 +33,36 @@
   background: url("../img/images/sidebar_box_top.png") no-repeat top left;
   background-size: 176px 17px;
 }
+
+@media (max-width: 920px)
+{
+  .page {
+  background: url("../img/images/page_mobile.jpg") no-repeat top center;
+  background-size: 900px 405px;
+}
+	
+	
+ .post {
+  background:
+    url("../img/images/post_top.png") repeat-x top left,
+    url("../img/images/post_bottom.png") repeat-x bottom left,
+    url("../img/images/posts_bg.png") repeat-y left 20px;
+  background-size: 518px 20px, 518px 20px, 100% 2px;
+}
+	
+	.sidebox-title::before {
+    background: url(../img/images/sidebar_box_top.png) repeat-x top left;
+    background-size: 176px 17px;
+}
+
+.sidebox-title {
+    background: url(../img/images/sidebar_title.png) repeat-x top left;
+    background-size: 176px 35px;
+}
+
+.sidebox {
+    background: url(../img/images/sidebar_box_top.png) repeat-x top left, url(../img/images/sidebar_box_bottom.png) repeat-x bottom left, url(../img/images/sidebar_bg.gif) repeat left 17px;
+    background-size: 176px 17px, 176px 17px, 100% 2px;
+}
+	
+}

@@ -193,6 +193,7 @@ body {
   }
 
   .search-top {
+	display: none; 
     position: static;
     width: 100%;
     margin: 10px 0;
@@ -234,7 +235,11 @@ body {
   }
 }
 
-
+   
+  .sidebar-column { display: flex; flex-direction: column; }
+  
+  .sidebox { order: 1; }
+  
   .sidebox-content {
     padding: 10px;
   }
@@ -242,6 +247,8 @@ body {
   .sidebox-title {
     padding: 18px 10px 0;
   }
+  
+  .sidebox.search { order: 0; }
 }
 
 @media (max-width: 600px) {
